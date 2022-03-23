@@ -663,6 +663,8 @@ function addGroups(
       .attr("dominant-baseline", "auto")
       .attr("text-anchor", "middle")
       .attr("font-size", "0.8em");
+    group.size(50, 29);
+    group.move(175, 175);
   }
 }
 
