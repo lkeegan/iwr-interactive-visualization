@@ -47,7 +47,7 @@ var group_names = [
   ],
   [
     "Prof Anette\nFrank",
-    "Natural\nLanguage Processing\nGroup",
+    "Natural\nLanguage\nProcessing\nGroup",
     "https://typo.iwr.uni-heidelberg.de/",
   ],
   [
@@ -67,7 +67,7 @@ var group_names = [
   ],
   [
     "Prof Eva\nGutheil",
-    "Multiphase Flows\nand Combustion",
+    "Multiphase\nFlows and\nCombustion",
     "https://typo.iwr.uni-heidelberg.de/",
   ],
   [
@@ -177,7 +177,7 @@ var group_names = [
   ],
   [
     "Prof Kurt\nRoth",
-    "Terrestrial Systems\n& Chaotic, Complex,\nand Evolving\nEnvironmental Systems",
+    "Terrestrial\nSystems & Chaotic,\nComplex, and Evolving\nEnvironmental Systems",
     "https://typo.iwr.uni-heidelberg.de/",
   ],
   [
@@ -192,7 +192,7 @@ var group_names = [
   ],
   [
     "Prof Robert\nScheichl",
-    "Numerical\nAnalysis and\nUncertainty Quantification",
+    "Numerical\nAnalysis and\nUncertainty\nQuantification",
     "https://typo.iwr.uni-heidelberg.de/",
   ],
   [
@@ -458,7 +458,7 @@ function updateGroups(groups) {
   }
   var groupBoxIndex = { x: 0, y: 0 };
   var ncols = 2;
-  var height = 36;
+  var height = 50;
   var width = 72;
   var x0 = 0;
   var y0 = 0;
@@ -500,6 +500,11 @@ function updateGroups(groups) {
   }
   if (nGroups > 8) {
     ncols = 3;
+  }
+  if (nGroups > 12) {
+    ncols = 4;
+    height = 40;
+    width = 58;
   }
   x0 = 200 - (width * ncols) / 2;
   y0 = 200 - (height * Math.floor((nGroups + 1) / 2)) / ncols;
@@ -620,6 +625,14 @@ function addGroups(
   color,
   border_colour
 ) {
+  var linear = svg
+    .gradient("linear", function (add) {
+      add.stop({ offset: 0, color: application_color, opacity: 0.3 });
+      add.stop({ offset: 1, color: method_color, opacity: 0.1 });
+    })
+    .from(0, 0)
+    .to(0, 1);
+
   var boxHeight = 200;
   var boxWidth = 200;
   for (var i = 0; i < names.length; i++) {
@@ -635,7 +648,13 @@ function addGroups(
     link
       .polygon("0,100 50,13.4 150,13.4 200,100 150,186.6 50,186.6")
       .fill(color)
-      .stroke({ color: border_colour, width: 5 });
+      .stroke({ color: border_colour, width: 5 })
+      .fill(linear);
+    // outline
+    link
+      .polyline("4,100 51,17 149,17 196,100 149,183 51,183 4,100")
+      .fill("none")
+      .stroke({ color: "#000000", width: 1 });
     var padding = 40;
     // group name
     var groupNamePath = link
