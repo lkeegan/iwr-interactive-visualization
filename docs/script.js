@@ -464,7 +464,7 @@ function updateGroups(groups) {
   var y0 = 0;
   if (typeof groups == "undefined") {
     ncols = 4;
-    var nrows = 10;
+    var nrows = 9.7;
     width = 50;
     height = 29;
     SVG.find(".iwr-vis-logo").css({ opacity: 1, visibility: "visible" });
@@ -635,7 +635,7 @@ function addGroups(
     link
       .polygon("0,100 50,13.4 150,13.4 200,100 150,186.6 50,186.6")
       .fill(color)
-      .stroke(border_colour);
+      .stroke({ color: border_colour, width: 5 });
     var padding = 40;
     // group name
     var groupNamePath = link
@@ -936,5 +936,5 @@ window.onload = function () {
   var matrix = new SVG.Matrix(1.3333, 0, 0, -1.3333, -165.96, 69.546);
   logo.transform(matrix);
   logoGroup.size(28);
-  logoGroup.move(186, 175);
+  logoGroup.move(186, 179);
 };
